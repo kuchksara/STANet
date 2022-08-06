@@ -42,6 +42,8 @@ def val(opt):
         if i >= opt.num_test:  # only apply our model to opt.num_test images.
             break
         model.set_input(data)  # unpack data from data loader
+        print(data)
+        print(type(data))
         pred = model.test(val=False)           # run inference return pred
 
         img_path = model.get_image_paths()     # get image paths
@@ -68,6 +70,14 @@ def pred_image(data_root, results_dir):
 
     val(opt)
 
+from PIL import Image
+
+def make_square(im, min_size=256, fill_color=(0, 0, 0, 0)):
+    x, y = im.size
+    size = max(min_size, x, y)
+    new_im = Image.new('RGBA', (size, size), fill_color)
+    new_im.paste(im, (int((size - x) / 2), int((size - y) / 2)))
+    return new_im
 
 if __name__ == '__main__':
     # define the data_root and the results_dir
