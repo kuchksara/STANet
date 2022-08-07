@@ -42,8 +42,6 @@ def val(opt):
         if i >= opt.num_test:  # only apply our model to opt.num_test images.
             break
         model.set_input(data)  # unpack data from data loader
-        print(data)
-        print(type(data))
         pred = model.test(val=False)           # run inference return pred
 
         img_path = model.get_image_paths()     # get image paths
